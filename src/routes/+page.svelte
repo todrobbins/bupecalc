@@ -1,20 +1,45 @@
-<script>
+<script lang="ts">
   import Day from '$lib/Day.svelte'
 
-  let doses = [
-    {dose: 25, freq: 2},
-    {dose: 25, freq: 3},
-    {dose: 50, freq: 2}
+  let days = [
+    {dose: 0.5, freq: 2, drug: "belbuca"},
+    {dose: 1, freq: 3, drug: "suboxone 2mg"},
+    {dose: 2, freq: 2, drug: "suboxone 4mg"}
   ];
+
 
   let startDate = new Date()
 
-  // need to be able to override the doses by clicking on each element
-  // need to visualize
-  // need to add different drug types
-  // need to style
+
+  function addDay() {
+    let lastDay = days[days.length - 1];
+    days = [...days, {...lastDay}];
+  }
+
+  // Style Days - add chakra
+
+  // add drug visualizer
+
+  // set start date
+
+  // show total amt for each drug over whole course
+
+  // set which day is the last full agonist day
+
+  // include synopsis
+
 </script>
 <h1>BupeCalc</h1>
-{#each doses as dose, i}
-  <Day day={i + 1} {startDate} dose={dose.dose} freq={dose.freq}/>
+{#each days as day, i}
+  <Day
+    day={i + 1}
+    {startDate}
+    bind:drug={day.drug}
+    bind:dose={day.dose}
+    bind:freq={day.freq}
+  />
 {/each}
+
+<button on:click={addDay}>Add day</button>
+
+{JSON.stringify(days)}
