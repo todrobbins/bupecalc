@@ -2,9 +2,9 @@
 	import Day from '$lib/Day.svelte';
 
 	let days = [
-		{ dose: 0.5, freq: 2, drug: 'belbuca' },
-		{ dose: 1, freq: 3, drug: 'suboxone 2mg' },
-		{ dose: 2, freq: 2, drug: 'suboxone 4mg' }
+		{ dose: 0.5, freq: 2, drug: 'belbuca', stopOtherOpioids: false },
+		{ dose: 1, freq: 3, drug: 'suboxone 2mg', stopOtherOpioids: false },
+		{ dose: 2, freq: 2, drug: 'suboxone 4mg', stopOtherOpioids: false }
 	];
 
 	let startDate = new Date();
@@ -14,16 +14,22 @@
 		days = [...days, { ...lastDay }];
 	}
 
+	function toggleStop(dayNum: number) {
+		let day = days[dayNum];
+		day.stopOtherOpioids = !day.stopOtherOpioids;
+		days = days.map((d, i) => {
+			if (day.stopOtherOpioids) {
+				return { dose: d.dose, freq: d.freq, drug: d.drug, stopOtherOpioids: i >= dayNum };
+			}
+			return { dose: d.dose, freq: d.freq, drug: d.drug, stopOtherOpioids: false };
+		});
+		console.log(days);
+	}
 	/*
   Styling TODOs:
-  * make the inputs look more 'inline'
-  * make 2 columns?
+  * make this landscape orientation
+  * add morning/evening/afternoon rows 
   
-  UI TODOs:
-  * ableton-style dragging inputs
-
-	// set start date
-
 	// show total amt for each drug over whole course
 
 	// set which day is the last full agonist day
@@ -40,11 +46,13 @@
 	</div>
 	{#each days as day, i}
 		<Day
-			day={i + 1}
+			day={i}
 			bind:startDate
 			bind:drug={day.drug}
 			bind:dose={day.dose}
 			bind:freq={day.freq}
+			bind:stopOtherOpioids={day.stopOtherOpioids}
+			{toggleStop}
 		/>
 	{/each}
 
