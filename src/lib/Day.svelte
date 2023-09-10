@@ -28,29 +28,18 @@
 	$: totalDose = dose * freq;
 	$: numStrips = dose / fullStripMilligrams[drug];
 
-	let strips: { shape: [number, number]; numTiles: number }[] = [];
-
-	$: {
-		strips = [
-			{ shape: stripShapes[drug], numTiles: 8 },
-			{ shape: stripShapes[drug], numTiles: 8 },
-			{ shape: stripShapes[drug], numTiles: 5 }
-		];
-		for (let i = 0; i < strips.length; i++) {
-			console.log('reassigning', strips[i]);
-			strips[i] = strips[i];
-		}
-	}
+	let strips: { shape: [number, number]; stripProportion: number }[] = [];
+	$: strips = new Array(Math.ceil(numStrips)).fill(0).map((_value, i) => {
+		return { shape: stripShapes[drug], stripProportion: Math.min(numStrips - i, 1) };
+	});
 </script>
 
-<div>
+<div class="day">
 	<h3>
 		Day {day} ({date.toLocaleDateString()}):
 	</h3>
 
-	{JSON.stringify(strips)}
-
-	<input bind:value={dose} /> mg ({numStrips} strips
+	<input class="dosage" bind:value={dose} /> mg ({numStrips} strips
 	<select bind:value={drug}>
 		{#each drugChoices as drugChoice}
 			<option value={drugChoice}>
@@ -59,9 +48,20 @@
 		{/each}
 	</select>
 	)
-	<input type="number" bind:value={freq} min="1" max="3" />x/day (total dose {totalDose} mg)
+	<input class="frequency" type="number" bind:value={freq} min="1" max="3" />x/day (total dose {totalDose}
+	mg)
 	<Strips {strips} />
 </div>
 
 <style>
+	input.dosage {
+		width: 4em;
+	}
+
+	input.frequency {
+		width: 3em;
+	}
+
+	div.day {
+	}
 </style>

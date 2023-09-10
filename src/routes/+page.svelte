@@ -27,17 +27,26 @@
 	// include synopsis
 </script>
 
-<h1>BupeCalc</h1>
-{#each days as day, i}
-	<Day day={i + 1} {startDate} bind:drug={day.drug} bind:dose={day.dose} bind:freq={day.freq} />
-{/each}
+<div class="content">
+	<h1>BupeCalc</h1>
+	{#each days as day, i}
+		<Day day={i + 1} {startDate} bind:drug={day.drug} bind:dose={day.dose} bind:freq={day.freq} />
+	{/each}
 
-<button on:click={addDay}>Add day</button>
-
-{JSON.stringify(days)}
+	<button on:click={addDay}>Add day</button>
+</div>
 
 <style>
-	* {
+	body {
 		box-sizing: border-box;
+		-webkit-print-color-adjust: exact !important;
+		print-color-adjust: exact !important;
+	}
+
+	div.content {
+		width: 60em;
+		margin: auto;
+		padding: 2em;
+		height: 100%;
 	}
 </style>
