@@ -14,9 +14,13 @@
 		days = [...days, { ...lastDay }];
 	}
 
-	// Style Days - add chakra
-
-	// add drug visualizer
+	/*
+  Styling TODOs:
+  * make the inputs look more 'inline'
+  * make 2 columns?
+  
+  UI TODOs:
+  * ableton-style dragging inputs
 
 	// set start date
 
@@ -25,19 +29,30 @@
 	// set which day is the last full agonist day
 
 	// include synopsis
+
+  */
 </script>
 
 <div class="content">
 	<h1>BupeCalc</h1>
+	<div class="start-date no-print">
+		Start date:<input class="start-date" type="date" bind:value={startDate} />
+	</div>
 	{#each days as day, i}
-		<Day day={i + 1} {startDate} bind:drug={day.drug} bind:dose={day.dose} bind:freq={day.freq} />
+		<Day
+			day={i + 1}
+			bind:startDate
+			bind:drug={day.drug}
+			bind:dose={day.dose}
+			bind:freq={day.freq}
+		/>
 	{/each}
 
-	<button on:click={addDay}>Add day</button>
+	<button class="no-print add-day" on:click={addDay}>Add day</button>
 </div>
 
 <style>
-	body {
+	* {
 		box-sizing: border-box;
 		-webkit-print-color-adjust: exact !important;
 		print-color-adjust: exact !important;
@@ -48,5 +63,18 @@
 		margin: auto;
 		padding: 2em;
 		height: 100%;
+	}
+
+	@media print {
+		.no-print,
+		.no-print * {
+			display: none !important;
+		}
+	}
+
+	button.add-day {
+		width: 12em;
+		height: 2em;
+		font-size: 18pt;
 	}
 </style>

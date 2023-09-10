@@ -6,8 +6,8 @@
 	export let freq: number;
 	export let drug: string;
 
-	let date = new Date(startDate);
-	date.setDate(startDate.getDate() + day);
+	let date: Date = new Date();
+	$: date = new Date(date.setDate(new Date(startDate).getDate() + day));
 
 	const fullStripMilligrams: { [id: string]: number } = {
 		belbuca: 0.25,
@@ -39,7 +39,7 @@
 		Day {day} ({date.toLocaleDateString()}):
 	</h3>
 
-	<input class="dosage" bind:value={dose} /> mg ({numStrips} strips
+	<input class="dosage" bind:value={dose} /> mg
 	<select bind:value={drug}>
 		{#each drugChoices as drugChoice}
 			<option value={drugChoice}>
@@ -47,7 +47,7 @@
 			</option>
 		{/each}
 	</select>
-	)
+	({numStrips} strips)
 	<input class="frequency" type="number" bind:value={freq} min="1" max="3" />x/day (total dose {totalDose}
 	mg)
 	<Strips {strips} />
@@ -60,8 +60,5 @@
 
 	input.frequency {
 		width: 3em;
-	}
-
-	div.day {
 	}
 </style>

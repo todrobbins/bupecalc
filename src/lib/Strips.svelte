@@ -9,3 +9,11 @@
 		<Strip bind:shape={strip.shape} bind:stripProportion={strip.stripProportion} />
 	{/each}
 </div>
+
+<style>
+	div.strips {
+		display: flex;
+		gap: 1em;
+		margin: 1em;
+	}
+</style>
