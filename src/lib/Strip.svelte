@@ -1,6 +1,7 @@
 <script lang="ts">
 	export let shape: [number, number];
 	export let stripProportion: number;
+	export let drug: string;
 
 	const g = 10;
 	let rows: boolean[][] = [];
@@ -23,14 +24,18 @@
 	}
 </script>
 
-<div>
-	<svg viewBox="0 0 {shape[1] * g} {shape[0] * g}">
+<div class={drug.toLowerCase().replaceAll(' ', '-')}>
+	<svg viewBox="-1 -1 {shape[1] * g + 2} {shape[0] * g + 2}">
 		{#each rows as row, i}
 			{#each row as cell, j}
 				<rect x={j * g} y={i * g} width={g} height={g} class={cell ? 'used' : 'unused'} />
-				<line class="sep" x1={j * g} y1={i * g} x2={j * g} y2={(i + 1) * g} />
+				{#if j > 0}
+					<line class="sep" x1={j * g} y1={i * g} x2={j * g} y2={(i + 1) * g} />
+				{/if}
 			{/each}
-			<line class="sep" x1="0" y1={i * g} x2={shape[1] * g} y2={i * g} />
+			{#if i > 0}
+				<line class="sep" x1="0" y1={i * g} x2={shape[1] * g} y2={i * g} />
+			{/if}
 		{/each}
 		<rect class="full-strip" x="0" y="0" width={shape[1] * g} height={shape[0] * g} />
 	</svg>
@@ -40,22 +45,36 @@
 	rect.unused {
 		fill: white;
 	}
-	rect.used {
-		fill: lightgreen;
+
+	div.belbuca rect.used {
+		fill: rgb(200, 160, 80);
+	}
+
+	div.suboxone-2mg rect.used {
+		fill: rgb(160, 160, 240);
+	}
+
+	div.suboxone-4mg rect.used {
+		fill: rgb(120, 120, 200);
+	}
+
+	div.suboxone-8mg rect.used {
+		fill: rgb(80, 80, 160);
 	}
 
 	rect.full-strip {
 		fill: rgba(0, 0, 0, 0);
 		stroke: black;
+		stroke-width: 0.5px;
 	}
 
 	line.sep {
-		stroke: grey;
+		stroke: rgba(0, 0, 0, 0.5);
 		stroke-width: 0.5px;
 		stroke-dasharray: 1, 1;
 	}
 
 	svg {
-		height: 4em;
+		height: 2.5em;
 	}
 </style>
