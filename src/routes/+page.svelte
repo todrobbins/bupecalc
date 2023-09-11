@@ -34,21 +34,29 @@
 		});
 		console.log(days);
 	}
-	/*
-  Styling TODOs:
-  * make this landscape orientation
-  * add morning/evening/afternoon rows 
-  
-	// show total amt for each drug over whole course
 
-	// include synopsis
-  */
+	const totalDoses = days.reduce(
+		(acc: { belbuca: number; suboxone: number }, cur) => {
+			const drugType = cur.drug.split(' ')[0];
+			acc[drugType] += cur.dose;
+			return acc;
+		},
+		{ belbuca: 0, suboxone: 0 }
+	);
 </script>
 
 <div class="content">
 	<h1>BupeCalc</h1>
 	<div class="start-date no-print">
 		Start date:<input class="start-date" type="date" bind:value={startDate} />
+	</div>
+	<div class="overview">
+		<h3>Overview</h3>
+		Over the course of treatment, you will use
+		{Object.entries(totalDoses)
+			.filter(([_drug, dose]) => dose > 0)
+			.map(([drug, dose]) => `${dose} mg of ${drug}`)
+			.join(' and ')}.
 	</div>
 	<div class="days">
 		{#each days as day, i}
