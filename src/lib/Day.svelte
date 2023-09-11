@@ -1,5 +1,6 @@
 <script lang="ts">
 	import Strips from '$lib/Strips.svelte';
+	import { STRIP_TYPES } from '$lib/StripType';
 	export let day: number;
 	export let startDate: Date;
 	export let dose: number;
@@ -11,28 +12,16 @@
 
 	$: date = new Date(new Date(startDate).setDate(new Date(startDate).getUTCDate() + day));
 
-	const fullStripMilligrams: { [id: string]: number } = {
-		belbuca: 0.25,
-		'suboxone 2mg': 2,
-		'suboxone 4mg': 4,
-		'suboxone 8mg': 8
-	};
+	console.log(STRIP_TYPES);
 
-	const drugChoices = Object.keys(fullStripMilligrams);
-
-	const stripShapes: { [id: string]: [number, number] } = {
-		belbuca: [2, 2],
-		'suboxone 2mg': [2, 4],
-		'suboxone 4mg': [2, 4],
-		'suboxone 8mg': [2, 4]
-	};
+	const drugChoices = Object.keys(STRIP_TYPES);
 
 	$: totalDose = dose * freq;
-	$: numStrips = dose / fullStripMilligrams[drug];
+	$: numStrips = dose / STRIP_TYPES[drug].fullStripDose;
 
 	let strips: { shape: [number, number]; stripProportion: number }[] = [];
 	$: strips = new Array(Math.ceil(numStrips)).fill(0).map((_value, i) => {
-		return { shape: stripShapes[drug], stripProportion: Math.min(numStrips - i, 1) };
+		return { shape: STRIP_TYPES[drug].shape, stripProportion: Math.min(numStrips - i, 1) };
 	});
 
 	let dayToggler = () => toggleStop(day);

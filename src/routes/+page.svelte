@@ -1,6 +1,8 @@
 <script lang="ts">
 	import Day from '$lib/Day.svelte';
 
+	import { STRIP_TYPES } from '$lib/StripType';
+
 	let days = [
 		{ dose: 0.5, freq: 2, drug: 'belbuca', stopOtherOpioids: false },
 		{ dose: 1, freq: 3, drug: 'suboxone 2mg', stopOtherOpioids: false },
@@ -35,14 +37,25 @@
 		console.log(days);
 	}
 
-	const totalDoses = days.reduce(
-		(acc: { belbuca: number; suboxone: number }, cur) => {
-			const drugType = cur.drug.split(' ')[0];
-			acc[drugType] += cur.dose;
+	$: totalDoses = days.reduce(
+		(acc: { [id: string]: number }, cur) => {
+			acc[STRIP_TYPES[cur.drug].drugType] += cur.dose * cur.freq;
 			return acc;
 		},
 		{ belbuca: 0, suboxone: 0 }
 	);
+
+	$: totalDosageByType = days.reduce((acc: { [id: string]: number }, cur) => {
+		acc[cur.drug] += cur.dose * cur.freq;
+		return acc;
+	}, Object.fromEntries(Object.keys(STRIP_TYPES).map((drugType: string) => [drugType, 0])));
+
+	$: totalStripsByStripType = Object.entries(totalDosageByType)
+		.map(([stripType, totalDosage]) => [
+			stripType,
+			Math.ceil(totalDosage / STRIP_TYPES[stripType].fullStripDose)
+		])
+		.filter(([_drugType, count]) => count > 0);
 </script>
 
 <div class="content">
@@ -57,6 +70,12 @@
 			.filter(([_drug, dose]) => dose > 0)
 			.map(([drug, dose]) => `${dose} mg of ${drug}`)
 			.join(' and ')}.
+
+		<p>
+			Total strips: {totalStripsByStripType
+				.map(([stripType, count]) => `${count}x ${stripType}`)
+				.join(', ')}
+		</p>
 	</div>
 	<div class="days">
 		{#each days as day, i}
