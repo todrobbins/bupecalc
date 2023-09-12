@@ -56,6 +56,8 @@
 			Math.ceil(totalDosage / STRIP_TYPES[stripType].fullStripDose)
 		])
 		.filter(([_drugType, count]) => count > 0);
+
+	export const prerender = true;
 </script>
 
 <div class="content">
