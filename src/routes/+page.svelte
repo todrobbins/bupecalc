@@ -65,17 +65,37 @@
 	</div>
 	<div class="overview">
 		<h3>Overview</h3>
-		Over the course of treatment, you will use
-		{Object.entries(totalDoses)
-			.filter(([_drug, dose]) => dose > 0)
-			.map(([drug, dose]) => `${dose} mg of ${drug}`)
-			.join(' and ')}.
-
-		<p>
-			Total strips: {totalStripsByStripType
-				.map(([stripType, count]) => `${count}x ${stripType}`)
-				.join(', ')}
-		</p>
+		<div class="instructions">
+			<ul>
+				<li>
+					Main goal is to ease you into buprenorphine treatment slowly while also trying to prevent
+					precipitated withdrawal.
+				</li>
+				<li>
+					The idea is to slowly increase buprenorphine levels up to the desired dose of 8 mg per
+					day.
+				</li>
+				<li>Continue use of full agonist opioids (oxycodone, heroin, fentanyl, etc.)</li>
+				<li>This method should cause minimal withdrawal symptoms.</li>
+				<li>
+					Call your PCP if you have questions or concerns, or are experiencing symptoms of
+					withdrawal.
+				</li>
+				<li>
+					Over the course of treatment, you will use
+					{Object.entries(totalDoses)
+						.filter(([_drug, dose]) => dose > 0)
+						.map(([drug, dose]) => `${dose} mg of ${drug}`)
+						.join(' and ')}.
+				</li>
+				<li>
+					Total strips used: {totalStripsByStripType
+						.map(([stripType, count]) => `${count}x ${stripType}`)
+						.join(', ')}
+				</li>
+			</ul>
+		</div>
+		<p />
 	</div>
 	<div class="days">
 		{#each days as day, i}
