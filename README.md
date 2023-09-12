@@ -1,18 +1,14 @@
-# create-svelte
+# Bupecalc
 
-Everything you need to build a Svelte project, powered by [`create-svelte`](https://github.com/sveltejs/kit/tree/master/packages/create-svelte).
+Calculate and visualize dosage for various types of buprenorphine.
 
-## Creating a project
+Designed to be used online and then printed out in landscape mode.
 
-If you're seeing this, you've probably already done this step. Congrats!
+## TODO
 
-```bash
-# create a new project in the current directory
-npm create svelte@latest
-
-# create a new project in my-app
-npm create svelte@latest my-app
-```
+* [ ] add subutex, which is a pill instead of a strip - though we can model this as a 2x1 strip for now
+* [ ] add multiple preset regimens to choose between
+* [ ] update the belbuca and suboxone strip colors
 
 ## Developing
 
@@ -34,5 +30,3 @@ npm run build
 ```
 
 You can preview the production build with `npm run preview`.
-
-> To deploy your app, you may need to install an [adapter](https://kit.svelte.dev/docs/adapters) for your target environment.

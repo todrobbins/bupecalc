@@ -73,10 +73,6 @@
 					Main goal is to ease you into buprenorphine treatment slowly while also trying to prevent
 					precipitated withdrawal.
 				</li>
-				<li>
-					The idea is to slowly increase buprenorphine levels up to the desired dose of 8 mg per
-					day.
-				</li>
 				<li>Continue use of full agonist opioids (oxycodone, heroin, fentanyl, etc.)</li>
 				<li>This method should cause minimal withdrawal symptoms.</li>
 				<li>
