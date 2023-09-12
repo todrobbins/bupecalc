@@ -120,7 +120,7 @@
 	}
 
 	div.content {
-		width: 100%;
+		max-width: 60em;
 		margin: auto;
 		padding: 2em;
 		height: 100%;
