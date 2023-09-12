@@ -47,19 +47,23 @@
 	}
 
 	div.belbuca rect.used {
-		fill: rgb(200, 160, 80);
+		fill: rgb(227, 210, 110);
 	}
 
 	div.suboxone-2mg rect.used {
-		fill: rgb(160, 160, 240);
+		fill: rgba(194, 122, 40, 0.4);
 	}
 
 	div.suboxone-4mg rect.used {
-		fill: rgb(120, 120, 200);
+		fill: rgba(194, 122, 40, 0.6);
 	}
 
 	div.suboxone-8mg rect.used {
-		fill: rgb(80, 80, 160);
+		fill: rgba(194, 122, 40, 0.8);
+	}
+
+	div.subutex-2mg rect.used {
+		fill: rgba(200, 200, 200, 1);
 	}
 
 	rect.full-strip {

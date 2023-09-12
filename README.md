@@ -6,9 +6,7 @@ Designed to be used online and then printed out in landscape mode.
 
 ## TODO
 
-* [ ] add subutex, which is a pill instead of a strip - though we can model this as a 2x1 strip for now
 * [ ] add multiple preset regimens to choose between
-* [ ] update the belbuca and suboxone strip colors
 
 ## Developing
 
