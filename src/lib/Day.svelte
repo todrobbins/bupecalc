@@ -33,7 +33,7 @@
 		Day {day + 1} ({date.toLocaleDateString()})
 	</h3>
 	<div class="no-print">
-		<button class="remove-self" on:click={removeSelf}>X</button>
+		<button class="remove-self" on:click={removeSelf}>✕</button>
 	</div>
 	<div class="stop-other-opioids {stopOtherOpioids ? 'stop' : 'keep'}" on:click={dayToggler}>
 		{stopOtherOpioids ? 'Stop' : 'Keep'} taking other opioids
@@ -99,7 +99,7 @@
 
 	button.remove-self {
 		position: absolute;
-		top: 0.5em;
+		top: 1em;
 		right: 0.5em;
 		background-color: rgba(0, 0, 0, 0);
 		border: none;
