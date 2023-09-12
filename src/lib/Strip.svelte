@@ -24,7 +24,7 @@
 	}
 </script>
 
-<div class={drug.toLowerCase().replaceAll(' ', '-')}>
+<div class="svg-container {drug.toLowerCase().replaceAll(' ', '-')}">
 	<svg viewBox="-1 -1 {shape[1] * g + 2} {shape[0] * g + 2}">
 		{#each rows as row, i}
 			{#each row as cell, j}
@@ -79,6 +79,10 @@
 	}
 
 	svg {
+		height: 100%;
+	}
+
+	div.svg-container {
 		height: 2.5em;
 	}
 </style>

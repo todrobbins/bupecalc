@@ -144,7 +144,7 @@
 	}
 
 	button.add-day {
-		width: 16em;
+		width: 15em;
 		min-height: 20em;
 	}
 </style>

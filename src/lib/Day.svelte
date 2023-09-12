@@ -35,9 +35,10 @@
 	<div class="no-print">
 		<button class="remove-self" on:click={removeSelf}>✕</button>
 	</div>
-	<div class="stop-other-opioids {stopOtherOpioids ? 'stop' : 'keep'}" on:click={dayToggler}>
+
+	<button class="stop-other-opioids {stopOtherOpioids ? 'stop' : 'keep'}" on:click={dayToggler}>
 		{stopOtherOpioids ? 'Stop' : 'Keep'} taking other opioids
-	</div>
+	</button>
 
 	<div class="dosage">
 		<input class="dosage" bind:value={dose} /> mg
@@ -53,7 +54,7 @@
 		{numStrips == 1 ? STRIP_TYPES[drug].formSingle : STRIP_TYPES[drug].formPlural})
 	</div>
 	<div class="frequency">
-		<input class="frequency" type="number" bind:value={freq} min="1" max="3" />x/day
+		<input class="frequency" type="number" bind:value={freq} min="1" max="3" /> x/day
 		<br />(total dose {totalDose} mg)
 	</div>
 	<Strips {strips} {freq} {drug} />
@@ -61,14 +62,13 @@
 
 <style>
 	h3 {
-		margin-bottom: 0;
+		margin-bottom: 0.5em;
 	}
 
 	div.day {
 		width: 12em;
 		display: flex;
 		flex-direction: column;
-		gap: 1em;
 		position: relative;
 		padding: 0.5em;
 	}
@@ -81,20 +81,39 @@
 		width: 2.5em;
 	}
 
-	div.stop-other-opioids {
+	select.drug {
+		appearance: none;
+		background-color: white;
+		border: none;
+		color: blue;
 		font-style: italic;
 		font-weight: bold;
+		padding: 0;
+		padding-left: 0.5em;
 	}
-
-	div.stop-other-opioids:hover {
+	select.drug:hover {
 		text-decoration-line: underline;
 	}
 
-	div.stop {
+	button.stop-other-opioids {
+		background-color: white;
+		border: none;
+		padding: 0;
+		font-style: italic;
+		font-weight: bold;
+		text-align: left;
+		margin-bottom: 1em;
+	}
+
+	button.stop-other-opioids:hover {
+		text-decoration-line: underline;
+	}
+
+	button.stop {
 		color: maroon;
 	}
 
-	div.keep {
+	button.keep {
 		color: green;
 	}
 
@@ -110,6 +129,16 @@
 	button.remove-self:hover {
 		color: red;
 		text-decoration-line: underline;
+	}
+
+	div.dosage {
+		margin-bottom: 0.5em;
+		line-height: 1.5em;
+	}
+
+	div.frequency {
+		margin-bottom: 0.5em;
+		line-height: 1.5em;
 	}
 
 	@media print {

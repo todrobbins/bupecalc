@@ -22,6 +22,7 @@
 				</td>
 			</tr>
 		</table>
+		{#if i < freq - 1}<hr />{/if}
 	{/each}
 </div>
 
@@ -29,7 +30,6 @@
 	div.strips {
 		display: flex;
 		flex-direction: column;
-		gap: 1em;
 	}
 
 	td.dose-label {
@@ -39,6 +39,12 @@
 	td.strip-viz-container {
 		display: flex;
 		flex-flow: row wrap;
-		gap: 1em;
+		gap: 0.5em;
+	}
+
+	hr {
+		border: 0;
+		border-top: 1px dashed rgba(0, 0, 0, 0.5);
+		width: 100%;
 	}
 </style>
